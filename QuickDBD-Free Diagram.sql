@@ -1,3 +1,11 @@
+﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Link to schema: https://app.quickdatabasediagrams.com/#/d/UJeKLP
+-- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
+
+-- Modify this code to update the DB schema diagram.
+-- To reset the sample schema, replace everything with
+-- two dots ('..' - without quotes).
+
 CREATE TABLE "departments" (
     "dept_noID" VARCHAR(30)   NOT NULL,
     "dept_name" VARCHAR(30)   NOT NULL,
@@ -63,33 +71,4 @@ REFERENCES "employees" ("emp_noID");
 
 ALTER TABLE "titles" ADD CONSTRAINT "fk_titles_emp_noID" FOREIGN KEY("emp_noID")
 REFERENCES "employees" ("emp_noID");
-
---1. List the following details of each employee: employee number, last name, first name, gender, and salary.
-SELECT a."emp_noID", last_name, first_name, gender, salary
-FROM employees as a
-INNER JOIN salaries as b 
-ON a."emp_noID" = b."emp_noID";
-
---List employees who were hired in 1986.
-SELECT * FROM employees
-WHERE "hire_date" BETWEEN '1986-01-01' AND '1986-12-31';
-
---List the manager of each department with the following information: department number, 
---department name, the manager's employee number, last name, first name, and start and end employment dates.
-SELECT dept_emp."dept_noID", dept_name, dept_emp."emp_noID", last_name, first_name, dept_emp."from_date", dept_emp."to_date"
-FROM dept_emp
-INNER JOIN departments ON dept_emp."dept_noID" = departments."dept_noID"
-INNER JOIN employees ON dept_emp."emp_noID" = employees."emp_noID";
-
---4. List the department of each employee with the following information: employee number, last name, first name, and department name.
-SELECT dept_emp."emp_noID", last_name, first_name, dept_name
-FROM dept_emp
-INNER JOIN departments ON dept_emp."dept_noID" = departments."dept_noID"
-INNER JOIN employees ON dept_emp."emp_noID" = employees."emp_noID";
-
---5. List all employees whose first name is "Hercules" and last names begin with "B."
-SELECT * FROM employees
-WHERE first_name = 'Hercules'
-AND last_name = 'B*';
-
 
